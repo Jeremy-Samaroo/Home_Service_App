@@ -62,7 +62,10 @@ class _ProfileFormState extends State<ProfileForm> {
                                 offset: Offset(7.0, 8.0))
                           ]),
                       child: imageLoaded == false
-                          ? Image.network(widget.user.pfp)
+                          ? Image.network(
+                            widget.user.pfp,
+                            fit: BoxFit.cover,
+                          )
                           : Image.network(
                               imageURL_list[0],
                               fit: BoxFit.cover,
