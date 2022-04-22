@@ -4,7 +4,7 @@
 // utility that Flutter provides. For example, you can send tap and scroll
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
-
+//flutter drive \ --driver=test_driver/integration_test_driver.dart \ --target=test/widget_test.dart \--web-port=4444 --browser-name=chrome
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:home_service_app/views/loginView.dart';

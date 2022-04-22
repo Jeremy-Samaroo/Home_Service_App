@@ -224,6 +224,7 @@ class jobDetails_InfoWidget_State extends State<jobDetails_InfoWidget> {
                       ),
                     ),
                     ElevatedButton(
+                      key: Key("Request Job"),
                       onPressed: requestJob,
                       child: Text(
                         "Request Job",
