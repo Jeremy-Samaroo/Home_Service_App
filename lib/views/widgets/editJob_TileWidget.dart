@@ -168,7 +168,9 @@ class _editJobTileListingState extends State<editJobTileListing> {
                         primary: Color.fromRGBO(54, 153, 244, 1),
                         shape: new RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(30))),
-                    onPressed: editThisJob,
+                    onPressed: () {
+                      editThisJob(job);
+                    },
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
                       child: Text(
@@ -215,7 +217,9 @@ class _editJobTileListingState extends State<editJobTileListing> {
     );
   }
 
-  editThisJob() {}
+  editThisJob(JobData job) {
+    
+  }
 
   Future<void> LoadData() async {
     await getJobs();
