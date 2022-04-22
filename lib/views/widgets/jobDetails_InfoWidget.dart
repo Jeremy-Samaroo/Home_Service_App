@@ -23,6 +23,17 @@ class jobDetails_InfoWidget extends StatefulWidget {
 }
 
 class jobDetails_InfoWidget_State extends State<jobDetails_InfoWidget> {
+  late String clientIamge;
+  late String clientName;
+  bool clientDataLoaded = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadClient();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -43,7 +54,8 @@ class jobDetails_InfoWidget_State extends State<jobDetails_InfoWidget> {
                       blurRadius: 7,
                       offset: Offset(7.0, 8.0))
                 ]),
-            child: Row(
+            child: clientDataLoaded == true
+            ?Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 15),
@@ -56,7 +68,7 @@ class jobDetails_InfoWidget_State extends State<jobDetails_InfoWidget> {
                           // ignore: unnecessary_new
                           image: new DecorationImage(
                               fit: BoxFit.cover,
-                              image: NetworkImage(widget.user.pfp)))),
+                              image: NetworkImage(clientIamge)))),
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -83,7 +95,7 @@ class jobDetails_InfoWidget_State extends State<jobDetails_InfoWidget> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(15, 8, 8, 8),
                       child: Text(
-                        widget.user.uName,
+                        clientName,
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           color: Colors.black,
@@ -95,7 +107,10 @@ class jobDetails_InfoWidget_State extends State<jobDetails_InfoWidget> {
                   ],
                 ),
               ],
-            ),
+            )
+            :Center(
+              child: CircularProgressIndicator(),
+            )
           ),
         ),
         Padding(
@@ -307,5 +322,24 @@ class jobDetails_InfoWidget_State extends State<jobDetails_InfoWidget> {
     });
 
     return HtmlElementView(viewType: htmlId);
+  }
+
+  Future<void> loadClient() async {
+    await getClient();
+  }
+
+  getClient() async {
+    final querySnapshot = FirebaseFirestore.instance
+        .collection('users')
+        .where('Active_Jobs', arrayContains: widget.job.jobID)
+        .get()
+        .then((QuerySnapshot value) {
+      print(value.docs[0].get('ID'));
+      setState(() {
+        clientIamge = value.docs[0].get('Profile_Picture');
+        clientName = value.docs[0].get('Name');
+        clientDataLoaded = true;
+      });
+    });
   }
 }
