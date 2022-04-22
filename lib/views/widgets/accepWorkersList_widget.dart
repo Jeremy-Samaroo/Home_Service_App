@@ -91,7 +91,6 @@ class _Active_Jobs_ListState extends State<Active_Jobs_List> {
                       return buildWorkerImage(ImageURL, index);
                     },
                     options: CarouselOptions(
-                      height: 125,
                       autoPlay: true,
                       viewportFraction: 1,
                       enableInfiniteScroll: true,
