@@ -22,6 +22,7 @@ class jobListingView extends StatefulWidget {
 class _jobListingViewState extends State<jobListingView> {
   List<JobData> allJobs = [];
   List<String> job_Types = [
+    'All Jobs',
     'Yark Work',
     'Cleaning',
     'Landscaping',
@@ -32,7 +33,7 @@ class _jobListingViewState extends State<jobListingView> {
   ];
   List<String> job_Distance = ['Closest', 'Farthest'];
   List<String> job_Prices = ['Low - High', 'High - Low'];
-  String? selected_Type = 'Plumbing';
+  String? selected_Type = 'All Jobs';
   String? selected_Distance = 'Closest';
   String? selected_Price = 'Low - High';
   int total_jobs = 0;
