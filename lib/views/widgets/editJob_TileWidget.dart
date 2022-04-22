@@ -183,8 +183,8 @@ class _editJobTileListingState extends State<editJobTileListing> {
                         primary: Color.fromRGBO(244, 67, 54, 1),
                         shape: new RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(30))),
-                    onPressed: (){
-                      removeThisJob(job.jobID);
+                    onPressed: () {
+                      removeThisJob(job);
                     },
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
@@ -221,8 +221,10 @@ class _editJobTileListingState extends State<editJobTileListing> {
     await getJobs();
   }
 
-  removeThisJob(String ID) {
-    widget.user.removeActiveJob(ID);
+  removeThisJob(JobData job) {
+    widget.user.removeActiveJob(job.jobID);
+    final docJob = FirebaseFirestore.instance.collection('jobs');
+    docJob.doc(job.jobID).delete();
     final docUser =
         FirebaseFirestore.instance.collection('users').doc(widget.user.user_ID);
     docUser.update({'Active_Jobs': widget.user.activeJobs});
