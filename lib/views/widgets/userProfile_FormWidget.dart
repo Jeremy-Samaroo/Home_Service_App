@@ -320,13 +320,13 @@ class _ProfileFormState extends State<ProfileForm> {
       await upload(widget.user.user_ID);
       widget.user.setpfp(value);
       docUser.update({'Profile_Picture': value});
-      Navigator.push(
+    }
+    Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => HomeView(
                   user: widget.user,
                 )));
-    }
   }
 
   upload(String jobID) async {
