@@ -104,7 +104,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
           isLogin == true
               ? Container(
-                  height: 600,
+                  //height: 600,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Color.fromRGBO(229, 229, 229, 1),
@@ -119,7 +119,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 15, left: 35),
+                        padding: const EdgeInsets.only(top: 15, left: 55),
                         child: Text(
                           "Email",
                           textAlign: TextAlign.left,
@@ -131,7 +131,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(35, 10, 35, 0),
+                        padding: const EdgeInsets.fromLTRB(55, 10, 55, 0),
                         child: TextField(
                           key: Key('email'),
                           obscureText: false,
@@ -147,7 +147,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 35, top: 15),
+                        padding: const EdgeInsets.only(left: 55, top: 15),
                         child: Text(
                           "Password",
                           textAlign: TextAlign.left,
@@ -159,7 +159,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(35, 10, 35, 0),
+                        padding: const EdgeInsets.fromLTRB(55, 10, 55, 0),
                         child: TextField(
                           key: const Key('password'),
                           obscureText: true,
@@ -192,7 +192,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           ),
                         ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 25),
+                        padding: const EdgeInsets.only(top: 25, bottom: 200),
                         child: Container(
                           alignment: Alignment.center,
                           child: ElevatedButton(
