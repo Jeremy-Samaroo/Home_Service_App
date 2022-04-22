@@ -12,7 +12,7 @@ class Footer extends StatelessWidget {
         height: 100,
         decoration: BoxDecoration(
           color: Color.fromRGBO(51, 51, 51, 1),
-          borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+        ),
         child: Row(
           children: [
             Expanded(
@@ -63,7 +63,7 @@ class Footer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Text(
-                    'Demo Information',
+                    'Home Service App',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
