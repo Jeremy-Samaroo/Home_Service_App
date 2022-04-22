@@ -51,11 +51,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                         isLogin = true;
                         print(
                             '[ElevatedButton(Login)] : isLogin Updated -> $isLogin');
-                        emailController.dispose();
-                        passController.dispose();
-                        fnameController.dispose();
-                        lnameController.dispose();
-                        conpassController.dispose();
                       });
                     },
                     child: Padding(
@@ -85,12 +80,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                         isLogin = false;
                         print(
                             '[ElevatedButton(Signup)] : isLogin Updated -> $isLogin');
-                        emailController.dispose();
-                        passController.dispose();
-                        fnameController.dispose();
-                        lnameController.dispose();
-                        conpassController.dispose();
-                        
                         
                       });
                     },
