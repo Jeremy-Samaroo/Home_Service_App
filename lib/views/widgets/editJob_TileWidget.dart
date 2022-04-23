@@ -93,7 +93,7 @@ class _editJobTileListingState extends State<editJobTileListing> {
         children: [
           recievedImages == false
               ? Container(
-                  height: 200,
+                  height: 150,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       color: Color.fromRGBO(196, 196, 196, 1)),
@@ -106,7 +106,7 @@ class _editJobTileListingState extends State<editJobTileListing> {
                     return buildWorkerImage(ImageURL, index);
                   },
                   options: CarouselOptions(
-                    height: 200,
+                    height: 150,
                     autoPlay: true,
                     viewportFraction: 1,
                     enableInfiniteScroll: true,
