@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:home_service_app/views/loginView.dart';
+import 'package:home_service_app/views/widgets/navBar.dart';
 import 'package:integration_test/integration_test.dart';
 // TODO 5: Import the app that you want to test
 import 'package:home_service_app/main.dart' as app;
@@ -20,7 +23,7 @@ void main() {
       app.main();
 
       // TODO 7: Wait until the app has settled
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 5));
       // TODO 8: create finders for email, password and login
       final emailformfield = find.byKey(Key('email'));
       final passformfield = find.byKey(Key('password'));
@@ -33,23 +36,62 @@ void main() {
       await tester.enterText(passformfield, "12345");
       await tester.pumpAndSettle();
       await tester.tap(loginbutton);
+      print("tap Login\n");
+      await FirebaseFirestore.instance.waitForPendingWrites();
+
       await tester.pumpAndSettle();
 
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+      await tester.pumpAndSettle(const Duration(seconds: 5));
       //await tester.pump();
-     
-      await tester.pumpAndSettle(const Duration(seconds: 2));
-       final joblistingbutton = find.byKey(Key("TopbarJobListing"));
-        expect(joblistingbutton, findsOneWidget);
+      await FirebaseFirestore.instance.waitForPendingWrites();
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+
+      //final topbar = find.byKey(Key("TopBar"));
+      final joblistingbutton = find.byKey(Key("TopbarJobListing"));
+      //expect(joblistingbutton, findsOneWidget);
+      print("tap jobListing\n");
       await tester.tap(joblistingbutton);
-     await tester.pumpAndSettle(const Duration(seconds: 2));
-     
-      // TODO 10: Enter text for the password
-      // TODO 11: Tap on the login button and wait till it settled
-      // TODO 12: Find the first checkbox in the screen
-      // TODO 13: Check the semantics of the checkbox if it is not checked
-      // TODO 13: Tap on the checkbox and wait till it settled
-      // TODO 14: Expect the result to be checked
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+
+      final jobcard = find.byKey(Key("jobListing0"));
+      print("job card\n");
+      await tester.tap(jobcard);
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+      final requestButton = find.byKey(Key('Request Job'));
+      expect(requestButton, requestButton);
+      print("request\n");
+      await tester.pumpAndSettle();
+      await tester.tap(requestButton);
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+      print("pump");
     });
+
+    testWidgets("Test add Job",(tester)async{
+      app.main();
+
+      // TODO 7: Wait until the app has settled
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+      // TODO 8: create finders for email, password and login
+      final emailformfield = find.byKey(Key('email'));
+      final passformfield = find.byKey(Key('password'));
+      final loginbutton = find.byKey(Key('loginButton'));
+      expect(emailformfield, findsOneWidget);
+      expect(passformfield, findsOneWidget);
+      expect(loginbutton, findsOneWidget);
+      // TODO 9: Enter text for the email address
+      await tester.enterText(emailformfield, "jilesramjattan@gmail.com");
+      await tester.enterText(passformfield, "12345");
+      await tester.pumpAndSettle();
+      await tester.tap(loginbutton);
+      print("tap Login\n");
+      await FirebaseFirestore.instance.waitForPendingWrites();
+
+      await tester.pumpAndSettle();
+
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+      //await tester.pump();
+      await FirebaseFirestore.instance.waitForPendingWrites();
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+    }); 
   });
 }

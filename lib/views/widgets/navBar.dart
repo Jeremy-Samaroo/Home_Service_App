@@ -57,7 +57,7 @@ class TopBar extends StatelessWidget {
                 width: 60,
               ),
               InkWell(
-                key: Key("TopbarJobListing"),
+                key: const Key("TopbarJobListing"),
                 onTap: () async {
                   await Navigator.push(
               context,

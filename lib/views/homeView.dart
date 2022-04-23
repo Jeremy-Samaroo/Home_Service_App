@@ -33,6 +33,7 @@ class _HomeViewState extends State<HomeView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TopBar(
+                key: Key("TopBar"),
                 user: widget.user,
               ),
               Padding(

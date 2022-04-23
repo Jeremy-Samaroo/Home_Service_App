@@ -207,14 +207,15 @@ class _jobListingViewState extends State<jobListingView> {
         width: 600,
         child: total_jobs >= 1
             ? ListView.builder(
+              
                 shrinkWrap: true,
                 itemCount: total_jobs,
                 itemBuilder: (context, index) {
                   if (allJobs[index] == null) {
-                    print("help");
+                    
                     index++;
                   }
-                  return jobTile(allJobs[index]);
+                  return jobTile(allJobs[index],index);
                 })
             : Center(
                 child: CircularProgressIndicator(),
@@ -261,10 +262,11 @@ class _jobListingViewState extends State<jobListingView> {
     return HtmlElementView(viewType: htmlId);
   }
 
-  Widget jobTile(JobData job) {
+  Widget jobTile(JobData job, int index) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: InkWell(
+        key: Key("jobListing"+index.toString()),
         borderRadius: BorderRadius.all(Radius.circular(30)),
         hoverColor: Color.fromRGBO(195, 166, 96, 0.25),
         onTap: () {
