@@ -296,7 +296,6 @@ class _Complete_Job_FormState extends State<Complete_Job_Form> {
   }
 
   Future<void> submit() async {
-    List<String> comJob = [""];
     await uploadImageAndSaveItemInfo(widget.job.jobID);
     final docJob =
         FirebaseFirestore.instance.collection('jobs').doc(widget.job.jobID);
@@ -310,11 +309,7 @@ class _Complete_Job_FormState extends State<Complete_Job_Form> {
         FirebaseFirestore.instance.collection('users').doc(widget.user.user_ID);
     widget.user.setactiveJob("");
     docUser.update({'Current_Job_Taken': ""});
-    final docClientUser = FirebaseFirestore.instance
-        .collection('users')
-        .doc('aQLa7Mef9YVKllpADt1H');
-    comJob.add(widget.job.jobID);
-    docClientUser.update({'Completed_Jobs': comJob});
+    getClientID(widget.job.jobID);
     showToast('Review Completed!');
     Navigator.push(
         context,
@@ -322,6 +317,19 @@ class _Complete_Job_FormState extends State<Complete_Job_Form> {
             builder: (context) => HomeView(
                   user: widget.user,
                 )));
+  }
+
+  getClientID(String jobID) {
+    List<String> comJob = [""];
+    comJob.add(widget.job.jobID);
+    final querySnapshot = FirebaseFirestore.instance
+        .collection('users')
+        .where('Active_Jobs', arrayContains: widget.job.jobID)
+        .get()
+        .then((QuerySnapshot value) {
+      final docClientUser = FirebaseFirestore.instance.collection('users').doc(value.docs[0].get('ID'));
+      docClientUser.update({'Completed_Jobs': comJob});
+    });
   }
 
   void showToast(String msg) {
